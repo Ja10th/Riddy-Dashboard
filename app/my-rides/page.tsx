@@ -37,7 +37,6 @@ const MyRidesPage: React.FC = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [bookingDetails, setBookingDetails] = useState<{ pickup: string; destination: string; date: string; time: string; price: number; } | null>(null);
 
-  // Function to fetch address from coordinates
   const fetchAddressFromCoords = async (lat: number, lng: number) => {
     const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`);
     const data = await response.json();
@@ -69,7 +68,7 @@ const MyRidesPage: React.FC = () => {
 
   useEffect(() => {
     if (pickupCoords && destinationCoords) {
-      calculateRoute(); // Call calculateRoute whenever coords change
+      calculateRoute(); 
     }
   }, [pickupCoords, destinationCoords]);
 
@@ -88,7 +87,7 @@ const MyRidesPage: React.FC = () => {
   };
 
   const calculateRoute = () => {
-    if (!pickupCoords || !destinationCoords) return; // Ensure both coordinates are available
+    if (!pickupCoords || !destinationCoords) return; 
     
     const directionsService = new window.google.maps.DirectionsService();
     directionsService.route(
@@ -133,7 +132,7 @@ const MyRidesPage: React.FC = () => {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
 
   if (!apiKey) {
-    return <div>Error: Google Maps API key is missing.</div>; // Handle missing API key gracefully
+    return <div>Error: Google Maps API key is missing.</div>; 
   }
 
   return (
@@ -154,13 +153,12 @@ const MyRidesPage: React.FC = () => {
                         const place = pickupRef.getPlace();
                         if (place.geometry && place.geometry.location) {
                           const { lat, lng } = place.geometry.location.toJSON();
-                          // Set the formatted address directly
                           setRideData((prev) => ({
                             ...prev,
-                            pickup: place.formatted_address || '', // Ensure pickup is set to the formatted address
+                            pickup: place.formatted_address || '', 
                           }));
                           setPickupCoords({ lat, lng });
-                          calculateRoute(); // Calculate the route if destination is set
+                          calculateRoute(); 
                         }
                       }
                     }}
@@ -182,13 +180,12 @@ const MyRidesPage: React.FC = () => {
                       const place = destinationRef.getPlace();
                       if (place.geometry && place.geometry.location) {
                         const { lat, lng } = place.geometry.location.toJSON();
-                        // Set the formatted address directly
                         setRideData((prev) => ({
                           ...prev,
-                          destination: place.formatted_address || '', // Ensure destination is set to the formatted address
+                          destination: place.formatted_address || '', 
                         }));
                         setDestinationCoords({ lat, lng });
-                        calculateRoute(); // Calculate the route if pickup is set
+                        calculateRoute(); 
                         }
                       }
                     }}
@@ -285,14 +282,14 @@ const MyRidesPage: React.FC = () => {
           ride={selectedRide}
           bookingDetails={bookingDetails}
           onConfirm={() => {
-            setShowSuccessModal(true); // Show success modal on confirm
-            setShowModal(false); // Close booking confirmation modal
+            setShowSuccessModal(true); 
+            setShowModal(false); 
           }}
         />
 
           <SuccessModal
           isOpen={showSuccessModal}
-          onClose={() => setShowSuccessModal(false)} // Close success modal
+          onClose={() => setShowSuccessModal(false)} 
           />
         </div>
         <div className='flex flex-col lg:flex-row max-w-7xl mx-auto py-20'>
@@ -351,7 +348,6 @@ const MyRidesPage: React.FC = () => {
 
 
 
- // Update Modal component to handle confirm action
 const Modal = ({ isOpen, onClose, ride, bookingDetails, onConfirm }: { isOpen: boolean; onClose: () => void; ride: Ride; bookingDetails: { pickup: string; destination: string; date: string; time: string; price: number; } | null; onConfirm: () => void; }) => {
   if (!isOpen || !bookingDetails) return null;
 
@@ -371,7 +367,7 @@ const Modal = ({ isOpen, onClose, ride, bookingDetails, onConfirm }: { isOpen: b
           <button className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition duration-200" onClick={onClose}>
             Cancel
           </button>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200" onClick={onConfirm}> {/* Trigger success modal */}
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200" onClick={onConfirm}> 
             Confirm
           </button>
         </div>

@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Autocomplete, useJsApiLoader, Libraries } from '@react-google-maps/api';
 
-// Define the libraries array correctly with the `Library[]` type
 const libraries: Libraries = ['places'];
 
 const Form = () => {
@@ -55,7 +54,6 @@ const Form = () => {
       return;
     }
 
-    // Get coordinates of pickup and destination
     const getCoordinates = async (address: string) => {
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=AIzaSyBEtw4QhU-44KI_dfLdLpj1YgwpDtPUf54`
