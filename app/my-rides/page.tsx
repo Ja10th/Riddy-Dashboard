@@ -39,7 +39,7 @@ const MyRidesPage: React.FC = () => {
 
   // Function to fetch address from coordinates
   const fetchAddressFromCoords = async (lat: number, lng: number) => {
-    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyBEtw4QhU-44KI_dfLdLpj1YgwpDtPUf54`);
+    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`);
     const data = await response.json();
     return data.results[0]?.formatted_address || '';
   };
@@ -130,6 +130,12 @@ const MyRidesPage: React.FC = () => {
     { id: 5, pickup: 'Onitsha', destination: 'Abia', vehicle: 'Sedan', price: 9000, rating: 5 },
   ];
 
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
+
+  if (!apiKey) {
+    return <div>Error: Google Maps API key is missing.</div>; // Handle missing API key gracefully
+  }
+
   return (
     <div>
       <NavBar />
@@ -140,7 +146,7 @@ const MyRidesPage: React.FC = () => {
             <h2 className="text-2xl font-bold pb-6">Get a ride</h2>
             <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
               <label className="block">
-                <LoadScript googleMapsApiKey="AIzaSyBEtw4QhU-44KI_dfLdLpj1YgwpDtPUf54" libraries={["places"]}>
+                <LoadScript googleMapsApiKey={apiKey} libraries={["places"]}>
                   <Autocomplete
                     onLoad={(ref) => setPickupRef(ref)}
                     onPlaceChanged={() => {
@@ -260,7 +266,7 @@ const MyRidesPage: React.FC = () => {
             
           </div>
           <div className="flex-1 p-4 h-[30vh] lg:h-[80vh] w-full rounded-2xl">
-            <LoadScript googleMapsApiKey="AIzaSyBEtw4QhU-44KI_dfLdLpj1YgwpDtPUf54" libraries={['places']}>
+            <LoadScript googleMapsApiKey={apiKey} libraries={['places']}>
             <GoogleMap
               onLoad={setMapRef}
               center={pickupCoords ? pickupCoords : { lat: 9.082, lng: 8.6753 }}
