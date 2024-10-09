@@ -1,37 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Rides Dashboard
 
-## Getting Started
+This project is a ride-booking dashboard that allows users to select pickup and destination locations, choose from available rides, and calculate estimated travel routes using Google Maps. The app integrates dynamic location search, route calculation, and pricing for various vehicle types.
 
-First, run the development server:
+[Live Project](https://riddydashboard.vercel.app/)
+
+## Features
+
+- **Location Autocomplete**: Utilizes Google Places API to allow users to search for and select pickup and destination locations.
+- **Dynamic Route Calculation**: Uses Google Maps Directions API to calculate the best driving route between selected pickup and destination points.
+- **Ride Selection**: Users can choose from different vehicle options (Sedan, SUV, Hatchback), each with different pricing.
+- **Previous Bookings**: Displays a list of past bookings, including details like vehicle type, trip price, and user ratings.
+- **Modals**: Modals for booking confirmation and success messages after a ride is selected.
+- **Responsive Design**: The UI is fully responsive, adapting to different screen sizes.
+
+## Tech Stack
+
+- **React**: The core UI framework for building the dashboard.
+- **Next.js**: Used to structure the project and manage routing.
+- **TypeScript**: Ensures type safety throughout the project, enhancing development efficiency and preventing runtime errors.
+- **Google Maps API**: 
+  - **Places Autocomplete**: For dynamic address suggestions.
+  - **Directions Service**: To calculate and render routes between locations.
+  - **Geocoding**: To fetch the address from the latitude and longitude of a location.
+- **React Icons**: For icons, such as car images and chevron arrows.
+- **Local Storage**: Saves user ride data for future use when the page is refreshed.
+- **React Hooks**: To manage component state and side effects (e.g., API calls).
+- **CSS**: To style the dashboard and ensure a clean, responsive layout.
+  
+## Key Integrations
+
+1. **Google Places Autocomplete API**: Provides search suggestions for locations and returns the latitude and longitude of the selected place.
+2. **Google Maps Directions API**: Takes the coordinates of pickup and destination points and calculates the route between them.
+3. **Geocoding API**: Converts coordinates (latitude, longitude) to human-readable addresses.
+
+## Usage
+
+To use this project, clone the repository and install the dependencies:
 
 ```bash
+git clone https://github.com/your-repo/my-rides-dashboard.git
+
+cd my-rides-dashboard
+
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Riddy-Dashboard
